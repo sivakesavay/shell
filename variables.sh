@@ -1,6 +1,6 @@
 #!/bin/bash
 
-plan1=hr's
+plan1=hrs
 plan2=employees
 plan3=mdsir
 
