@@ -41,13 +41,19 @@ validate $? "enable nodejs"
 dnf install nodejs -y &>>$logfile
 validate $? "install nodejs"
 
-id expense &>>$logfile
-if [$? -ne 0]
-then
-    useradd expense &>>$logfile
-    validate $? "creating user expense"
+# Check if user 'expense' exists
+id expense &>> "$logfile"
+if [ $? -ne 0 ]; then
+    # User does not exist, create the user
+    useradd expense &>> "$logfile"
+    if [ $? -eq 0 ]; then
+        echo "User 'expense' created successfully." &>> "$logfile"
+    else
+        echo "Failed to create user 'expense'." &>> "$logfile"
+    fi
 else
-    echo -e "expense user already created...$Y skipping...$N"
+    # User already exists
+    echo "Expense user already created... skipping..." &>> "$logfile"
 fi
 
 mkdir /app &>>$logfile
