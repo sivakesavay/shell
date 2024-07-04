@@ -45,7 +45,7 @@ validate $? "install nodejs"
 id expense &>> "$logfile"
 if [ $? -ne 0 ]; then
     # User does not exist, create the user
-    useradd expense &>> "$logfile"
+    sudo useradd expense &>> "$logfile"
     if [ $? -eq 0 ]; then
         echo "User 'expense' created successfully." &>> "$logfile"
     else
